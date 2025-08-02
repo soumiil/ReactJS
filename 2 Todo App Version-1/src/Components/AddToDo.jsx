@@ -13,9 +13,19 @@ function AddToDo({ onAddToDo }) {
         setTodoDate(event.target.value);
     };
 
+    function processTodo(str) {
+        if(str.length === 0 || typeof str !== 'string') {
+            return str;
+        }
+        let finalStr = str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        setTodo("");
+        setTodoDate("");
+        return finalStr;
+    }
+
     const handleAddButtonClick = () => {
         if(todo.trim().length !== 0 && todoDate.length !== 0) {
-            onAddToDo(todo.trim().toUpperCase(), todoDate, crypto.randomUUID());
+            onAddToDo(processTodo(todo), todoDate, crypto.randomUUID());
             setTodo("");
             setTodoDate("");
         }
@@ -23,7 +33,7 @@ function AddToDo({ onAddToDo }) {
 
     const handleEnterKeyPress = (event) => {
         if(todo.trim().length !== 0 && todoDate.length !== 0 && event.key === 'Enter') {
-            onAddToDo(todo.trim().toUpperCase(), todoDate, crypto.randomUUID());
+            onAddToDo(processTodo(todo), todoDate, crypto.randomUUID());
             setTodo("");
             setTodoDate("");
         }

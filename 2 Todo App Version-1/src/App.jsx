@@ -19,7 +19,7 @@ function App() {
     const handleDeleteTodo = (todoId) => {
         setList(
             list.filter((todo) => {
-                return todo["id"] !== todoId;
+                return todo.id !== todoId;
             })
         );
     };

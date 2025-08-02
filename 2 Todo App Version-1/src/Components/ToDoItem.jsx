@@ -4,11 +4,11 @@ function ToDoItem({ todos, onDeleteTodo }) {
     return (
         <>
             <div className={`container ${styles["todoContainer"]}`}>
-                {todos.length === 0 && <p>Your todo list is empty.</p>}
+                {todos.length === 0 && <p>You are all set for the day!</p>}
                 {todos.length !== 0 &&
                     todos.map((todo) => (
-                        <>
-                            <div class="row">
+                        <div key={todo.id}>
+                            <div className="row">
                                 <div className={`col-6 ${styles["row-style"]}`}>
                                     <h4>{todo.task}</h4>
                                 </div>
@@ -26,7 +26,7 @@ function ToDoItem({ todos, onDeleteTodo }) {
                                 </div>
                             </div>
                             <hr />
-                        </>
+                        </div>
                     ))}
             </div>
         </>
