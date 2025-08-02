@@ -1,0 +1,8 @@
+.row-style {
+  text-align: left;
+}
+
+.deleteButton {
+  min-width: 100px;
+  min-height: 3rem;
+}
