@@ -5,16 +5,24 @@ import { useState } from "react";
 
 function App() {
     const [list, setList] = useState([]);
-    const [todo, setTodo] = useState("");
-    const [todoDate, setTodoDate] = useState("");
 
-    const deleteTodo = (todoId) => {
+    const handleAddToDo = (todo, todoDate, todoId) => {
+        const newTodo = {
+            id: todoId,
+            task: todo,
+            date: todoDate,
+        };
+
+        setList([...list, newTodo]);
+    };
+
+    const handleDeleteTodo = (todoId) => {
         setList(
             list.filter((todo) => {
                 return todo["id"] !== todoId;
             })
         );
-    }
+    };
 
     return (
         <>
@@ -23,21 +31,11 @@ function App() {
                     <AppName />
                 </div>
                 <div>
-                    <AddToDo setList={setList} todo={todo} setTodo={setTodo} todoDate={todoDate} setTodoDate={setTodoDate}/>
+                    <AddToDo onAddToDo={handleAddToDo} />
                     <hr />
                 </div>
                 <div>
-                    {list.map((todo) => {
-                        return (
-                            <ToDoItem
-                                key={todo.id}
-                                todoId={todo.id}
-                                content={todo.task}
-                                date={todo.date}
-                                deleteTodo={deleteTodo}
-                            />
-                        );
-                    })}
+                    <ToDoItem todos={list} onDeleteTodo={handleDeleteTodo} />
                 </div>
             </center>
         </>

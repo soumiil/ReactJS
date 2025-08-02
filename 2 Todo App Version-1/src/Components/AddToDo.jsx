@@ -1,6 +1,34 @@
 import styles from "./AddToDo.module.css";
+import { useState } from "react";
 
-function AddToDo({ setList, todo, setTodo, todoDate, setTodoDate }) {
+function AddToDo({ onAddToDo }) {
+    const [todo, setTodo] = useState("");
+    const [todoDate, setTodoDate] = useState("");
+
+    const handleTodoChange = (event) => {
+        setTodo(event.target.value);
+    };
+
+    const handleTodoDateChange = (event) => {
+        setTodoDate(event.target.value);
+    };
+
+    const handleAddButtonClick = () => {
+        if(todo.trim().length !== 0 && todoDate.length !== 0) {
+            onAddToDo(todo.trim().toUpperCase(), todoDate, crypto.randomUUID());
+            setTodo("");
+            setTodoDate("");
+        }
+    };
+
+    const handleEnterKeyPress = (event) => {
+        if(todo.trim().length !== 0 && todoDate.length !== 0 && event.key === 'Enter') {
+            onAddToDo(todo.trim().toUpperCase(), todoDate, crypto.randomUUID());
+            setTodo("");
+            setTodoDate("");
+        }
+    }
+
     return (
         <>
             <div className="container">
@@ -11,41 +39,25 @@ function AddToDo({ setList, todo, setTodo, todoDate, setTodoDate }) {
                             type="text"
                             placeholder="Add your task here"
                             value={todo}
-                            onChange={(e) => {
-                                setTodo(e.target.value);
-                            }}
+                            onChange={handleTodoChange}
+                            onKeyDown={handleEnterKeyPress}
+
                         />
                     </div>
                     <div className="col-4">
                         <input
                             type="date"
                             value={todoDate}
-                            onChange={(e) => {
-                                setTodoDate(e.target.value);
-                            }}
+                            onChange={handleTodoDateChange}
+                            onKeyDown={handleEnterKeyPress}
+
                         />
                     </div>
                     <div className="col-2">
                         <button
                             type="button"
                             className="btn btn-success"
-                            onClick={() => {
-                                if (todo.trim() !== "" && todoDate !== "") {
-                                    const newItem = {
-                                        id: crypto.randomUUID(),
-                                        task: todo.trim(),
-                                        date: todoDate,
-                                    };
-                                    console.log(JSON.stringify(newItem));
-
-                                    setList((prevList) => [
-                                        ...prevList,
-                                        newItem,
-                                    ]);
-                                    setTodo("");
-                                    setTodoDate("");
-                                }
-                            }}
+                            onClick={handleAddButtonClick}
                         >
                             Add Item
                         </button>
