@@ -1,6 +1,7 @@
 import AppName from "./Components/AppName";
 import AddToDo from "./Components/AddToDo";
 import ToDoItem from "./Components/ToDoItem";
+import styles from "./App.module.css";
 import { useState } from "react";
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
             date: todoDate,
         };
 
-        setList([...list, newTodo]);
+        setList((prevList) => [...prevList, newTodo]);
     };
 
     const handleDeleteTodo = (todoId) => {
@@ -26,17 +27,10 @@ function App() {
 
     return (
         <>
-            <center className="todo-container">
-                <div>
-                    <AppName />
-                </div>
-                <div>
-                    <AddToDo onAddToDo={handleAddToDo} />
-                    <hr />
-                </div>
-                <div>
-                    <ToDoItem todos={list} onDeleteTodo={handleDeleteTodo} />
-                </div>
+            <center className={`${styles["todo-container"]}`}>
+                <AddToDo onAddToDo={handleAddToDo} />
+                <hr />
+                <ToDoItem todos={list} onDeleteTodo={handleDeleteTodo} />
             </center>
         </>
     );

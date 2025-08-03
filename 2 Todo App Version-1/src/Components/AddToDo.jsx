@@ -17,10 +17,10 @@ function AddToDo({ onAddToDo }) {
         if(str.length === 0 || typeof str !== 'string') {
             return str;
         }
-        let finalStr = str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
         setTodo("");
         setTodoDate("");
-        return finalStr;
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     }
 
     const handleAddButtonClick = () => {
@@ -41,11 +41,11 @@ function AddToDo({ onAddToDo }) {
 
     return (
         <>
-            <div className="container">
+            <div className={`${styles.container}`}>
                 <div className="row">
-                    <div className="col-6">
+                    <div className="col-6 mb-3">
                         <input
-                            className={styles.input}
+                            className={`${styles.input} form-control`}
                             type="text"
                             placeholder="Add your task here"
                             value={todo}
@@ -54,8 +54,9 @@ function AddToDo({ onAddToDo }) {
 
                         />
                     </div>
-                    <div className="col-4">
+                    <div className="col-4 mb-3">
                         <input
+                            className={`${styles.input} form-control`}
                             type="date"
                             value={todoDate}
                             onChange={handleTodoDateChange}
@@ -66,10 +67,10 @@ function AddToDo({ onAddToDo }) {
                     <div className="col-2">
                         <button
                             type="button"
-                            className="btn btn-success"
+                            className={`btn btn-success ${styles.addButton}`}
                             onClick={handleAddButtonClick}
                         >
-                            Add Item
+                            Add
                         </button>
                     </div>
                 </div>

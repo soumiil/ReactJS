@@ -1,8 +1,25 @@
 .row-style {
   text-align: left;
+  width: 100%;
 }
 
 .deleteButton {
-  min-width: 100px;
+  min-width: 5rem;
   min-height: 3rem;
+  /* text-align: right; */
+  float: right;
+}
+
+.mycontainer {
+  height: 70%;
+  width: 50%;
+  /* border: 2px solid; */
+  overflow: auto;
+  padding: 1rem;
+}
+
+.todoItemRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
