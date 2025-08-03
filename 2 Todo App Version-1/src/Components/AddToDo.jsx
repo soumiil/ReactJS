@@ -14,7 +14,7 @@ function AddToDo({ onAddToDo }) {
     };
 
     function processTodo(str) {
-        if(str.length === 0 || typeof str !== 'string') {
+        if (str.length === 0 || typeof str !== "string") {
             return str;
         }
 
@@ -23,8 +23,9 @@ function AddToDo({ onAddToDo }) {
         return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
     }
 
-    const handleAddButtonClick = () => {
-        if(todo.trim().length !== 0 && todoDate.length !== 0) {
+    const handleAddButtonClick = (event) => {
+        event.preventDefault();
+        if (todo.trim().length !== 0 && todoDate.length !== 0) {
             onAddToDo(processTodo(todo), todoDate, crypto.randomUUID());
             setTodo("");
             setTodoDate("");
@@ -32,17 +33,21 @@ function AddToDo({ onAddToDo }) {
     };
 
     const handleEnterKeyPress = (event) => {
-        if(todo.trim().length !== 0 && todoDate.length !== 0 && event.key === 'Enter') {
+        if (
+            todo.trim().length !== 0 &&
+            todoDate.length !== 0 &&
+            event.key === "Enter"
+        ) {
             onAddToDo(processTodo(todo), todoDate, crypto.randomUUID());
             setTodo("");
             setTodoDate("");
         }
-    }
+    };
 
     return (
         <>
             <div className={`${styles.container}`}>
-                <div className="row">
+                <form className="row" onSubmit={handleAddButtonClick}>
                     <div className="col-6 mb-3">
                         <input
                             className={`${styles.input} form-control`}
@@ -51,7 +56,6 @@ function AddToDo({ onAddToDo }) {
                             value={todo}
                             onChange={handleTodoChange}
                             onKeyDown={handleEnterKeyPress}
-
                         />
                     </div>
                     <div className="col-4 mb-3">
@@ -61,19 +65,18 @@ function AddToDo({ onAddToDo }) {
                             value={todoDate}
                             onChange={handleTodoDateChange}
                             onKeyDown={handleEnterKeyPress}
-
                         />
                     </div>
                     <div className="col-2">
                         <button
-                            type="button"
+                            type="submit"
                             className={`btn btn-success ${styles.addButton}`}
                             onClick={handleAddButtonClick}
                         >
                             Add
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </>
     );
