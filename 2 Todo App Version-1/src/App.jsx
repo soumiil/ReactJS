@@ -8,18 +8,19 @@ function App() {
     const [list, setList] = useState([]);
 
     const handleAddToDo = (todo, todoDate, todoId) => {
-        const newTodo = {
-            id: todoId,
-            task: todo,
-            date: todoDate,
-        };
-
-        setList((prevList) => [...prevList, newTodo]);
+        setList((prevList) => [
+            ...prevList,
+            {
+                id: todoId,
+                task: todo,
+                date: todoDate,
+            },
+        ]);
     };
 
     const handleDeleteTodo = (todoId) => {
-        setList(
-            list.filter((todo) => {
+        setList((prevList) =>
+            prevList.filter((todo) => {
                 return todo.id !== todoId;
             })
         );

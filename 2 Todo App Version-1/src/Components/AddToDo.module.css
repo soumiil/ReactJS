@@ -12,3 +12,8 @@
     margin-top: 2rem;
     width: 80%;
 }
+
+.errorMsg {
+    color: red;
+    text-align: left;
+}

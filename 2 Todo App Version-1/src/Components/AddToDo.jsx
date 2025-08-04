@@ -57,6 +57,9 @@ function AddToDo({ onAddToDo }) {
                             onChange={handleTodoChange}
                             onKeyDown={handleEnterKeyPress}
                         />
+                        {(todo === "" || todo === null) && (
+                            <p className={`${styles.errorMsg}`}>Uh oh, your todo task is empty</p>
+                        )}
                     </div>
                     <div className="col-4 mb-3">
                         <input
@@ -66,6 +69,9 @@ function AddToDo({ onAddToDo }) {
                             onChange={handleTodoDateChange}
                             onKeyDown={handleEnterKeyPress}
                         />
+                        {(todoDate === "" || todoDate === null) && (
+                            <p className={`${styles.errorMsg}`}>Uh oh, your todo date is empty.</p>
+                        )}
                     </div>
                     <div className="col-2">
                         <button
